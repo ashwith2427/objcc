@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4ED330D82E9E8AD70055CDAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED330D72E9E8AD70055CDAE /* Foundation.framework */; };
+		4ED330DA2E9E8EBA0055CDAE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4ED330D92E9E8EB40055CDAE /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		4ED330C32E9E8A610055CDAE /* objcc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = objcc; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED330D72E9E8AD70055CDAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4ED330D92E9E8EB40055CDAE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,6 +57,7 @@
 		4ED330BA2E9E8A610055CDAE = {
 			isa = PBXGroup;
 			children = (
+				4ED330D92E9E8EB40055CDAE /* README.md */,
 				4ED330CD2E9E8A7F0055CDAE /* include */,
 				4ED330C52E9E8A610055CDAE /* objcc */,
 				4ED330D62E9E8AD70055CDAE /* Frameworks */,
@@ -115,6 +118,7 @@
 				TargetAttributes = {
 					4ED330C22E9E8A610055CDAE = {
 						CreatedOnToolsVersion = 26.0;
+						LastSwiftMigration = 2600;
 					};
 				};
 			};
@@ -142,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ED330DA2E9E8EBA0055CDAE /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,22 +273,27 @@
 		4ED330CB2E9E8A610055CDAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 685Q722C9S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		4ED330CC2E9E8A610055CDAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 685Q722C9S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
