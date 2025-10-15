@@ -3,8 +3,8 @@
 
 namespace NS{
 class Object : public Ref::Object{
-public:
     BASE_TEMPLATE(Object, Ref::Object);
+public:
     Object(void): Ref::Object("NSObject"){}
 };
 }

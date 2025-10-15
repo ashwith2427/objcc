@@ -47,24 +47,20 @@ public:
     Message(Class cls, std::string const& selector) : MessageBase(cls, selector){}
     Message(Class cls, SEL selector) : MessageBase(cls, selector){}
     Message(std::string const& cls, std::string const& selector) : MessageBase(cls, selector){}
-    
     template <class... _Args>
-    _Ret send(_Args... args){
-        if constexpr(std::is_floating_point_v<_Ret>){
-            return reinterpret_cast<_Ret>(objc_msgSend_fpret(this->object(), this->selector(), std::forward<_Args>(args)...));
-        }else if constexpr(std::is_void_v<_Ret>){
-            objc_msgSend(this->object(), this->selector(), std::forward<_Args>(args)...);
-        }else if constexpr(std::is_class_v<_Ret>){
-            typedef _Ret (*Fn)(id, SEL, ...);
-            return reinterpret_cast<Fn>(objc_msgSend)(this->object(), this->selector(), std::forward<_Args>(args)...);
-        }else if constexpr(sizeof(_Ret) < sizeof(id)){
-            uintptr_t p;
-            p = reinterpret_cast<uintptr_t>(objc_msgSend(this->object(), this->selector(), std::forward<_Args>(args)...));
-            return static_cast<_Ret>(p);
-        }else if constexpr(sizeof(_Ret) >= sizeof(id)){
-            return reinterpret_cast<_Ret>(objc_msgSend(this->object(), this->selector(), std::forward<_Args>(args)...));
-        }else{
-            throw std::runtime_error("Corrupted return type...");
+    _Ret send(_Args... args) {
+        if constexpr(std::is_floating_point_v<_Ret>) {
+            return (( _Ret (*)(id, SEL, _Args...) )objc_msgSend_fpret)
+                    (this->object(), this->selector(), args...);
+        } else if constexpr(std::is_void_v<_Ret>) {
+            (( void (*)(id, SEL, _Args...) )objc_msgSend)
+                    (this->object(), this->selector(), args...);
+        } else if constexpr(std::is_class_v<_Ret> || std::is_pointer_v<_Ret>) {
+            using Fn = _Ret (*)(id, SEL, _Args...);
+            return ((Fn)objc_msgSend)(this->object(), this->selector(), args...);
+        } else {
+            using Fn = _Ret (*)(id, SEL, _Args...);
+            return ((Fn)objc_msgSend)(this->object(), this->selector(), args...);
         }
     }
 };

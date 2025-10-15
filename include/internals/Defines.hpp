@@ -67,6 +67,8 @@ namespace NS{
             GET_SELECTOR(zone, "zone");
             // NSString
             GET_SELECTOR(initWithUTF8String_, "initWithUTF8String:");
+            GET_SELECTOR(length, "length");
+            GET_SELECTOR(UTF8String, "UTF8String");
         }
     }
 }
