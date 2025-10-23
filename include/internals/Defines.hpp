@@ -60,6 +60,7 @@ namespace NS{
             GET_SELECTOR(debugDescription, "debugDescription");
             GET_SELECTOR(performSelector_, "performSelector:");
             GET_SELECTOR(performSelector_withObject_, "performSelector:withObject:");
+            GET_SELECTOR(hash, "hash");
             GET_SELECTOR(isProxy, "isProxy");
             GET_SELECTOR(retain, "retain");
             GET_SELECTOR(release, "release");

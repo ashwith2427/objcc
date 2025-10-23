@@ -1,3 +1,4 @@
+#pragma once
 typedef unsigned long NSUInteger;
 
 #define _NS_ENUM(type, name) enum name : type

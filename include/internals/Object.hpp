@@ -1,6 +1,8 @@
 #pragma once
 #include <internals/Defines.hpp>
 #include <internals/BaseObject.hpp>
+#include <string>
+#include <internals/Enums.hpp>
 
 namespace Ref{
 class Object;
@@ -25,6 +27,7 @@ public:
     bool            conformsToProtocol( void * protocol )   const;
     std::string     description( void )                     const;
     std::string     debugDescription( void )                const;
+    NSUInteger      hash( void )                            const;
     id              performSelector( SEL sel )                   ;
     id              performSelector( SEL sel, id o1 )            ;
     id              performSelector( SEL sel, id o1, id o2 )     ;
@@ -85,6 +88,11 @@ std::string Abstract::Object<_T>::description() const{
 template <class _T>
 std::string Abstract::Object<_T>::debugDescription() const{
     return static_cast<const _T*>(this)->debugDescription();
+}
+
+template <class _T>
+NSUInteger  Abstract::Object<_T>::hash() const{
+    return static_cast<const _T*>(this)->hash();
 }
 
 template <class _T>

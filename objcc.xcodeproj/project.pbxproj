@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4ED330D82E9E8AD70055CDAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED330D72E9E8AD70055CDAE /* Foundation.framework */; };
-		4ED330DA2E9E8EBA0055CDAE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4ED330D92E9E8EB40055CDAE /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +29,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4E3A92502EAA816800C96D6A /* source */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = source;
+			sourceTree = "<group>";
+		};
 		4ED330C52E9E8A610055CDAE /* objcc */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = objcc;
@@ -58,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				4ED330D92E9E8EB40055CDAE /* README.md */,
+				4E3A92502EAA816800C96D6A /* source */,
 				4ED330CD2E9E8A7F0055CDAE /* include */,
 				4ED330C52E9E8A610055CDAE /* objcc */,
 				4ED330D62E9E8AD70055CDAE /* Frameworks */,
@@ -88,15 +93,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ED330CA2E9E8A610055CDAE /* Build configuration list for PBXNativeTarget "objcc" */;
 			buildPhases = (
-				4ED330BF2E9E8A610055CDAE /* Sources */,
 				4ED330C02E9E8A610055CDAE /* Frameworks */,
 				4ED330C12E9E8A610055CDAE /* CopyFiles */,
+				4E3A92552EAA840900C96D6A /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				4E3A92502EAA816800C96D6A /* source */,
 				4ED330C52E9E8A610055CDAE /* objcc */,
 				4ED330CD2E9E8A7F0055CDAE /* include */,
 			);
@@ -142,11 +148,10 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4ED330BF2E9E8A610055CDAE /* Sources */ = {
+		4E3A92552EAA840900C96D6A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ED330DA2E9E8EBA0055CDAE /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

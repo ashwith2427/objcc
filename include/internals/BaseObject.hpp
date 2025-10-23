@@ -16,7 +16,11 @@ public:
     friend void swap(Object<_T>& o1, Object<_T>& o2);
 private:
     friend _T;
-    class IMPL;
+    class IMPL{
+    public:
+        IMPL()=default;
+        ~IMPL()=default;
+    };
     IMPL* impl;
 };
 }
@@ -26,7 +30,7 @@ Base::Object<_T>::Object(void): impl(new IMPL()){}
 
 template<typename _T>
 Base::Object<_T>::~Object(void){
-    delete this->impl;
+    delete impl;
 }
 
 template <typename _T>
@@ -38,7 +42,7 @@ template<typename _T>
 Base::Object<_T>::Object(Object const& o): impl(new IMPL(*(o.impl))){}
 
 template<typename _T>
-Base::Object<_T>::Object(Object&& o): impl(std::move(o)){
+Base::Object<_T>::Object(Object&& o): impl(std::move(o.impl)){
     o.impl = nullptr;
 }
 
