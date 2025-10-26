@@ -1,6 +1,6 @@
 #pragma once
 #include <algorithm>
-#include <internals/Defines.hpp>
+#include <internals/NSDefines.hpp>
 
 namespace Base{
 template <typename _T>

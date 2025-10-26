@@ -1,8 +1,8 @@
 #pragma once
-#include <internals/Defines.hpp>
+#include <internals/NSDefines.hpp>
 #include <internals/BaseObject.hpp>
 #include <string>
-#include <internals/Enums.hpp>
+#include <internals/NSEnums.hpp>
 
 namespace Ref{
 class Object;
@@ -34,6 +34,7 @@ public:
     bool            isProxy( void )                         const;
     id              retain( void )                               ;
     void            release( void )                              ;
+    NSUInteger      retainCount( void )                     const;
     id              autorelease( void )                     const;
     void*           zone( void )                            const;
 };
@@ -118,6 +119,11 @@ bool Abstract::Object<_T>::isProxy() const{
 template <class _T>
 id Abstract::Object<_T>::retain(){
     return static_cast<const _T*>(this)->retain();
+}
+
+template <class _T>
+NSUInteger Abstract::Object<_T>::retainCount() const{
+    return static_cast<const _T*>(this)->retainCount();
 }
 
 template <class _T>

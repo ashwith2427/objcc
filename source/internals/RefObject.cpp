@@ -48,7 +48,7 @@ Ref::Object::Object(std::string const& className, std::function<id(void)> init):
     Base::Object<Ref::Object>(),
     Abstract::Object<Object>(){
         this->impl->_className = className;
-        this->impl->_class = objc_getClass(className.c_str());
+        this->impl->_class = objc_lookUpClass(className.c_str());
         this->impl->_object = Message<id>(impl->_class, _NS_SELECTOR(alloc)).send();
         this->impl->_object = init();
 }
@@ -131,6 +131,9 @@ id Ref::Object::retain(void){
 }
 void Ref::Object::release(void){
     this->message<void>(_NS_SELECTOR(release)).send();
+}
+NSUInteger Ref::Object::retainCount() const{
+    return this->message<NSUInteger>(_NS_SELECTOR(retainCount)).send();
 }
 id Ref::Object::autorelease(void) const{
     return this->message<id>(_NS_SELECTOR(autorelease)).send();

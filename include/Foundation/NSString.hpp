@@ -1,6 +1,6 @@
 #pragma once
 #include <Foundation/NSObject.hpp>
-#include <internals/Enums.hpp>
+#include <internals/NSEnums.hpp>
 
 namespace NS{
 class String : public Object{

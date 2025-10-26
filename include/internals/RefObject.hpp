@@ -2,7 +2,7 @@
 #include <internals/Object.hpp>
 #include <internals/Message.hpp>
 #include <functional>
-#include <internals/Enums.hpp>
+#include <internals/NSEnums.hpp>
 
 #define BASE_TEMPLATE(_class, _base)                                        \
     protected:                                                              \
@@ -58,6 +58,7 @@ public:
     id              performSelector( SEL sel, id o1, id o2 )     ;
     bool            isProxy( void )                         const;
     id              retain( void )                               ;
+    NSUInteger      retainCount( void )                     const;
     void            release( void )                              ;
     id              autorelease( void )                     const;
     void*           zone( void )                            const;

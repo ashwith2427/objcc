@@ -1,27 +1,7 @@
 #pragma once
-#ifndef DEFINES_H
-#define DEFINES_H
-extern "C"{
-typedef struct objc_class* Class;
-typedef struct objc_object* id;
-typedef struct objc_selector* SEL;
-typedef struct objc_object Protocol;
-
-struct objc_super{
-    id reciever;
-    Class super_class;
-};
-
-extern Class        objc_getClass           (const char*);
-extern const char*  class_getName           (Class);
-extern id           objc_msgSend            (id, SEL, ...);
-extern double       objc_msgSend_fpret      (id, SEL, ...);
-extern void         objc_msgSend_stret      (void*, id, SEL, ...);
-extern SEL          sel_registerName        (const char*);
-extern Class        object_getClass         (id);
-extern Class        objc_lookUpClass        (const char*);
-}
-#endif
+#ifndef NS_DEFINES_H
+#define NS_DEFINES_H
+#include <internals/objc_bridge_functions.hpp>
 
 #define _NS_CLASS(name)         (NS::Private::Class::s_k##name)
 #define _NS_SELECTOR(accessor)  (NS::Private::Selector::s_k##accessor)
@@ -30,13 +10,14 @@ extern Class        objc_lookUpClass        (const char*);
 #define GET_CLASS(name)                                                  \
     static void* s_k##name NS_PRIVATE_VISIBILITY = objc_lookUpClass(#name)
 #define GET_SELECTOR(accessor, name)                                     \
-    static SEL s_k##accessor NS_PRIVATE_VISIBILITY = sel_registerName(name)
+    static SEL s_k##accessor NS_PRIVATE_VISIBILITY = sel_getUid(name)
 
 namespace NS{
     namespace Private{
         namespace Class{
             GET_CLASS(NSObject);
             GET_CLASS(NSString);
+            GET_CLASS(NSValue);
             GET_CLASS(NSUInteger);
         }
     }
@@ -64,12 +45,18 @@ namespace NS{
             GET_SELECTOR(isProxy, "isProxy");
             GET_SELECTOR(retain, "retain");
             GET_SELECTOR(release, "release");
+            GET_SELECTOR(retainCount, "retainCount");
             GET_SELECTOR(autorelease, "autorelease");
             GET_SELECTOR(zone, "zone");
             // NSString
             GET_SELECTOR(initWithUTF8String_, "initWithUTF8String:");
             GET_SELECTOR(length, "length");
             GET_SELECTOR(UTF8String, "UTF8String");
+            GET_SELECTOR(stringWithUTF8String_, "stringWithUTF8String:");
+            // NSValue
+            GET_SELECTOR(valueWithPointer_, "valueWithPointer:");
+            GET_SELECTOR(pointerValue, "pointerValue");
         }
     }
 }
+#endif

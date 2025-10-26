@@ -1,6 +1,6 @@
 #pragma once
 #include <internals/BaseObject.hpp>
-#include <internals/Defines.hpp>
+#include <internals/NSDefines.hpp>
 #include <type_traits>
 
 class MessageBase : public Base::Object<MessageBase>{
@@ -14,6 +14,7 @@ public:
     
     id object(void);
     SEL selector(void);
+    Class objc_class(void);
 };
 
 template <class _Ret>
@@ -34,10 +35,26 @@ public:
                     (this->object(), this->selector(), args...);
         } else if constexpr(std::is_class_v<_Ret> || std::is_pointer_v<_Ret>) {
             using Fn = _Ret (*)(id, SEL, _Args...);
-            return ((Fn)objc_msgSend)(this->object(), this->selector(), args...);
+            return ((Fn)objc_msgSend)(this->object(), this->selector(), std::forward<_Args>(args)...);
         } else {
             using Fn = _Ret (*)(id, SEL, _Args...);
             return ((Fn)objc_msgSend)(this->object(), this->selector(), args...);
+        }
+    }
+    template <class... _Args>
+    _Ret sendToClass(_Args... args) {
+        if constexpr(std::is_floating_point_v<_Ret>) {
+            return (( _Ret (*)(Class, SEL, _Args...) )objc_msgSend_fpret)
+                    (this->objc_class(), this->selector(), args...);
+        } else if constexpr(std::is_void_v<_Ret>) {
+            (( void (*)(Class, SEL, _Args...) )objc_msgSend)
+                    (this->objc_class(), this->selector(), args...);
+        } else if constexpr(std::is_class_v<_Ret> || std::is_pointer_v<_Ret>) {
+            using Fn = _Ret (*)(Class, SEL, _Args...);
+            return ((Fn)objc_msgSend)(this->objc_class(), this->selector(), std::forward<_Args>(args)...);
+        } else {
+            using Fn = _Ret (*)(Class, SEL, _Args...);
+            return ((Fn)objc_msgSend)(this->objc_class(), this->selector(), args...);
         }
     }
 };
