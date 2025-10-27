@@ -2,7 +2,7 @@
 #include <internals/BaseObject.hpp>
 #include <internals/NSDefines.hpp>
 #include <type_traits>
-
+#include <iostream>
 class MessageBase : public Base::Object<MessageBase>{
 public:
     using Base::Object<MessageBase>::impl;
@@ -29,16 +29,18 @@ public:
     _Ret send(_Args... args) {
         if constexpr(std::is_floating_point_v<_Ret>) {
             return (( _Ret (*)(id, SEL, _Args...) )objc_msgSend_fpret)
-                    (this->object(), this->selector(), args...);
+                    (this->object(), this->selector(), std::forward<_Args>(args)...);
         } else if constexpr(std::is_void_v<_Ret>) {
-            (( void (*)(id, SEL, _Args...) )objc_msgSend)
-                    (this->object(), this->selector(), args...);
+            using SendMessageProc = _Ret (*)(const void*, SEL, _Args...);
+
+            const SendMessageProc pProc = reinterpret_cast<SendMessageProc>(&objc_msgSend);
+            return (*pProc)(this->object(), this->selector(), args...);
         } else if constexpr(std::is_class_v<_Ret> || std::is_pointer_v<_Ret>) {
             using Fn = _Ret (*)(id, SEL, _Args...);
             return ((Fn)objc_msgSend)(this->object(), this->selector(), std::forward<_Args>(args)...);
         } else {
             using Fn = _Ret (*)(id, SEL, _Args...);
-            return ((Fn)objc_msgSend)(this->object(), this->selector(), args...);
+            return ((Fn)objc_msgSend)(this->object(), this->selector(), std::forward<_Args>(args)...);
         }
     }
     template <class... _Args>

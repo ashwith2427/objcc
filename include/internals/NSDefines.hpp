@@ -1,24 +1,22 @@
 #pragma once
-#ifndef NS_DEFINES_H
-#define NS_DEFINES_H
 #include <internals/objc_bridge_functions.hpp>
 
 #define _NS_CLASS(name)         (NS::Private::Class::s_k##name)
 #define _NS_SELECTOR(accessor)  (NS::Private::Selector::s_k##accessor)
 
 #define NS_PRIVATE_VISIBILITY __attribute__((visibility("default")))
-#define GET_CLASS(name)                                                  \
+#define NS_PRIVATE_DEF_CLASS(name)                                                  \
     static void* s_k##name NS_PRIVATE_VISIBILITY = objc_lookUpClass(#name)
-#define GET_SELECTOR(accessor, name)                                     \
+#define NS_PRIVATE_DEF_SELECTOR(accessor, name)                                     \
     static SEL s_k##accessor NS_PRIVATE_VISIBILITY = sel_getUid(name)
 
 namespace NS{
     namespace Private{
         namespace Class{
-            GET_CLASS(NSObject);
-            GET_CLASS(NSString);
-            GET_CLASS(NSValue);
-            GET_CLASS(NSUInteger);
+            NS_PRIVATE_DEF_CLASS(NSObject);
+            NS_PRIVATE_DEF_CLASS(NSString);
+            NS_PRIVATE_DEF_CLASS(NSValue);
+            NS_PRIVATE_DEF_CLASS(NSUInteger);
         }
     }
 }
@@ -27,36 +25,35 @@ namespace NS{
     namespace Private{
         namespace Selector{
             // NSObject
-            GET_SELECTOR(init, "init");
-            GET_SELECTOR(alloc, "alloc");
-            GET_SELECTOR(getClass, "class");
-            GET_SELECTOR(superclass, "superclass");
-            GET_SELECTOR(isEqual_, "isEqual:");
-            GET_SELECTOR(self, "self");
-            GET_SELECTOR(isKindOfClass_, "isKindOfClass:");
-            GET_SELECTOR(isMemberOfClass_, "isMemberOfClass:");
-            GET_SELECTOR(respondsToSelector_, "respondsToSelector:");
-            GET_SELECTOR(conformsToProtocol_, "conformsToProtocol:");
-            GET_SELECTOR(description, "description");
-            GET_SELECTOR(debugDescription, "debugDescription");
-            GET_SELECTOR(performSelector_, "performSelector:");
-            GET_SELECTOR(performSelector_withObject_, "performSelector:withObject:");
-            GET_SELECTOR(hash, "hash");
-            GET_SELECTOR(isProxy, "isProxy");
-            GET_SELECTOR(retain, "retain");
-            GET_SELECTOR(release, "release");
-            GET_SELECTOR(retainCount, "retainCount");
-            GET_SELECTOR(autorelease, "autorelease");
-            GET_SELECTOR(zone, "zone");
+            NS_PRIVATE_DEF_SELECTOR(init, "init");
+            NS_PRIVATE_DEF_SELECTOR(alloc, "alloc");
+            NS_PRIVATE_DEF_SELECTOR(getClass, "class");
+            NS_PRIVATE_DEF_SELECTOR(superclass, "superclass");
+            NS_PRIVATE_DEF_SELECTOR(isEqual_, "isEqual:");
+            NS_PRIVATE_DEF_SELECTOR(self, "self");
+            NS_PRIVATE_DEF_SELECTOR(isKindOfClass_, "isKindOfClass:");
+            NS_PRIVATE_DEF_SELECTOR(isMemberOfClass_, "isMemberOfClass:");
+            NS_PRIVATE_DEF_SELECTOR(respondsToSelector_, "respondsToSelector:");
+            NS_PRIVATE_DEF_SELECTOR(conformsToProtocol_, "conformsToProtocol:");
+            NS_PRIVATE_DEF_SELECTOR(description, "description");
+            NS_PRIVATE_DEF_SELECTOR(debugDescription, "debugDescription");
+            NS_PRIVATE_DEF_SELECTOR(performSelector_, "performSelector:");
+            NS_PRIVATE_DEF_SELECTOR(performSelector_withObject_, "performSelector:withObject:");
+            NS_PRIVATE_DEF_SELECTOR(hash, "hash");
+            NS_PRIVATE_DEF_SELECTOR(isProxy, "isProxy");
+            NS_PRIVATE_DEF_SELECTOR(retain, "retain");
+            NS_PRIVATE_DEF_SELECTOR(release, "release");
+            NS_PRIVATE_DEF_SELECTOR(retainCount, "retainCount");
+            NS_PRIVATE_DEF_SELECTOR(autorelease, "autorelease");
+            NS_PRIVATE_DEF_SELECTOR(zone, "zone");
             // NSString
-            GET_SELECTOR(initWithUTF8String_, "initWithUTF8String:");
-            GET_SELECTOR(length, "length");
-            GET_SELECTOR(UTF8String, "UTF8String");
-            GET_SELECTOR(stringWithUTF8String_, "stringWithUTF8String:");
+            NS_PRIVATE_DEF_SELECTOR(initWithUTF8String_, "initWithUTF8String:");
+            NS_PRIVATE_DEF_SELECTOR(length, "length");
+            NS_PRIVATE_DEF_SELECTOR(UTF8String, "UTF8String");
+            NS_PRIVATE_DEF_SELECTOR(stringWithUTF8String_, "stringWithUTF8String:");
             // NSValue
-            GET_SELECTOR(valueWithPointer_, "valueWithPointer:");
-            GET_SELECTOR(pointerValue, "pointerValue");
+            NS_PRIVATE_DEF_SELECTOR(valueWithPointer_, "valueWithPointer:");
+            NS_PRIVATE_DEF_SELECTOR(pointerValue, "pointerValue");
         }
     }
 }
-#endif

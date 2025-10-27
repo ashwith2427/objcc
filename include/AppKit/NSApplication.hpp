@@ -3,6 +3,7 @@
 #define NSAPPLICATION_H
 #include <Foundation/NSObject.hpp>
 #include <Foundation/NSNotification.hpp>
+#include <Foundation/NSValue.hpp>
 namespace NS{
 class ApplicationDelegate{
 public:
@@ -15,8 +16,11 @@ public:
 
 class Application : public Object{
 public:
-    Application* sharedApplication();
+    Application( void );
+    void run();
     void setDelegate(ApplicationDelegate* delegate);
+private:
+    NS::Value* wrapper;
 };
 }
 #endif

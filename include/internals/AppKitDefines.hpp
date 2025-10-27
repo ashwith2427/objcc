@@ -1,30 +1,38 @@
 #pragma once
-#ifndef APPKIT_DEFINES_H
-#define APPKIT_DEFINES_H
-
 #include <internals/objc_bridge_functions.hpp>
-#define _APPKIT_CLASS(name)         (NS::Private::Class::s_k##name)
-#define _APPKIT_SELECTOR(accessor)  (NS::Private::Selector::s_k##accessor)
+
+#define _APPKIT_CLASS(name) (Private::Class::s_k##name)
+#define _APPKIT_SELECTOR(accessor) (Private::Selector::s_k##accessor)
 
 #define NS_PRIVATE_VISIBILITY __attribute__((visibility("default")))
-#define GET_CLASS(name)                                                  \
+#define APPKIT_PRIVATE_DEF_CLASS(name)   \
     static void* s_k##name NS_PRIVATE_VISIBILITY = objc_lookUpClass(#name)
-#define GET_SELECTOR(accessor, name)                                     \
-    static SEL s_k##accessor NS_PRIVATE_VISIBILITY = sel_registerName(name)
+#define APPKIT_PRIVATE_DEF_SELECTOR(accessor, name)  \
+    static  SEL s_k##accessor NS_PRIVATE_VISIBILITY = sel_registerName(name)
 
-namespace NS::Private::Class{
-    GET_CLASS(NSApplication);
-    GET_CLASS(NSWindow);
+namespace NS{
+    namespace Private{
+        namespace Class{
+            APPKIT_PRIVATE_DEF_CLASS(NSApplication);
+            APPKIT_PRIVATE_DEF_CLASS(NSWindow);
+        }
+    }
 }
 
-namespace NS::Private::Selector{
-    GET_SELECTOR(sharedApplication, "sharedApplication");
-    GET_SELECTOR(setDelegate_, "setDelegate:");
-    GET_SELECTOR(run, "run");
-    GET_SELECTOR(applicationWillFinishLaunching_, "applicationWillFinishLaunching:");
-    GET_SELECTOR(applicationDidFinishLaunching_, "applicationDidFinishLaunching:");
-    GET_SELECTOR(appicationShouldTerminateAfterLastWindowClosed_, "applicationShouldTerminateAfterLastWindowClosed:");
-    GET_SELECTOR(setActivationPolicy_, "setActivationPolicy:");
+namespace NS{
+    namespace Private{
+        namespace Selector{
+            APPKIT_PRIVATE_DEF_SELECTOR(sharedApplication, "sharedApplication");
+            APPKIT_PRIVATE_DEF_SELECTOR(setDelegate_, "setDelegate:");
+            APPKIT_PRIVATE_DEF_SELECTOR(run, "run");
+            APPKIT_PRIVATE_DEF_SELECTOR(applicationWillFinishLaunching_, "applicationWillFinishLaunching:");
+            APPKIT_PRIVATE_DEF_SELECTOR(applicationDidFinishLaunching_, "applicationDidFinishLaunching:");
+            APPKIT_PRIVATE_DEF_SELECTOR(applicationShouldTerminateAfterLastWindowClosed_, "applicationShouldTerminateAfterLastWindowClosed:");
+            APPKIT_PRIVATE_DEF_SELECTOR(setActivationPolicy_, "setActivationPolicy:");
+            // NSWindow
+            APPKIT_PRIVATE_DEF_SELECTOR(initWithContentRect_styleMask_backing_defer_, "initWithContentRect:styleMask:backing:defer:");
+            APPKIT_PRIVATE_DEF_SELECTOR(setTitle_, "setTitle:");
+            APPKIT_PRIVATE_DEF_SELECTOR(makeKeyAndOrderFront_, "makeKeyAndOrderFront:");
+        }
+    }
 }
-
-#endif

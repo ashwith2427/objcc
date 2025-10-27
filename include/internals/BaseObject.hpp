@@ -7,7 +7,7 @@ template <typename _T>
 class Object {
 public:
     Object(void);
-    ~Object(void);
+    ~Object(void){}
     template<typename A1, typename... A2>
     Object(A1 a1, A2... a2);
     Object(Object<_T> const& o);
@@ -27,11 +27,6 @@ private:
 
 template<typename _T>
 Base::Object<_T>::Object(void): impl(new IMPL()){}
-
-template<typename _T>
-Base::Object<_T>::~Object(void){
-    delete impl;
-}
 
 template <typename _T>
 template <typename A1, typename... A2>

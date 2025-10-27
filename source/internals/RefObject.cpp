@@ -36,7 +36,9 @@ Base::Object<Ref::Object>::IMPL::IMPL(IMPL const& o): _className(o._className), 
 
 Ref::Object::Object(id object): Base::Object<Ref::Object>(object), Abstract::Object<Ref::Object>(){}
 
-Ref::Object::~Object(void){}
+Ref::Object::~Object(void){
+    delete impl;
+}
 
 Ref::Object::Object(std::string const& className):
             Ref::Object(
@@ -77,6 +79,14 @@ bool Ref::Object::operator!=(id object){
 
 Ref::Object::operator id(void) const{
     return this->impl->_object;
+}
+
+id Ref::Object::object() const{
+    return this->impl->_object;
+}
+
+Class Ref::Object::objc_class(void) const{
+    return this->impl->_class;
 }
 
 Class Ref::Object::getClass(void) const{

@@ -1,14 +1,12 @@
 #pragma once
-#ifndef NSVALUE_H
-#define NSVALUE_H
 #include <Foundation/NSObject.hpp>
 
 namespace NS{
 class Value: public Object{
+    BASE_TEMPLATE(Value, Object);
 public:
-    Value(void);
+    Value(void): Object("NSValue"){}
     Value(const void* pointer);
-    void* pointerValue();
+    void* pointerValue() const;
 };
 }
-#endif

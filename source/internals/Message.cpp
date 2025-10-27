@@ -1,5 +1,6 @@
 #include <internals/Message.hpp>
 #include <string>
+#include <iostream>
 
 template <>
 class Base::Object<MessageBase>::IMPL{
@@ -26,8 +27,8 @@ Base::Object<MessageBase>::IMPL::IMPL(id cls, SEL selector, Class objc_class):
     _object(cls), _selector(selector), _class(objc_class){}
 
 
-MessageBase::MessageBase(id cls, SEL selector):
-    Base::Object<MessageBase>(cls, selector, object_getClass(cls)){}
+MessageBase::MessageBase(id cls, SEL selector) : Base::Object<MessageBase>(cls, selector, object_getClass(cls)){
+}
 
 MessageBase::MessageBase(id cls, std::string const& selector): Base::Object<MessageBase>(cls, selector, object_getClass(cls)){}
 

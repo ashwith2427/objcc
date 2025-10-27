@@ -3,6 +3,7 @@
 #include <internals/Message.hpp>
 #include <functional>
 #include <internals/NSEnums.hpp>
+#include <iostream>
 
 #define BASE_TEMPLATE(_class, _base)                                        \
     protected:                                                              \
@@ -32,13 +33,15 @@ public:
     bool    operator==(id object);
     bool    operator!=(id object);
     operator id(void) const;
+    id object(void) const;
+    Class objc_class(void) const;
     template <class _Ret>
     Message<_Ret> message(std::string const& selector) const{
         return Message<_Ret>(*(this), selector);
     }
     template <class _Ret>
     Message<_Ret> message(SEL selector) const{
-        return Message<_Ret>(*(this), selector);
+        return Message<_Ret>(this->object(), selector);
     }
     
     using Base::Object<Object>::impl;
