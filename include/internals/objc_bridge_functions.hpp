@@ -1,5 +1,6 @@
 #pragma once
 #include <stddef.h>
+#include <cstdint>
 
 extern "C"{
 typedef struct objc_class* Class;
@@ -28,5 +29,7 @@ extern bool         class_addMethod         (Class, SEL, IMP, const char*);
 extern Class        objc_allocateClassPair  (Class, const char*, size_t);
 extern Protocol*    objc_getProtocol        (const char*);
 extern void         objc_registerClassPair  (Class);
+extern void         objc_setAssociatedObject(id, const void*, id, uintptr_t);
+extern id           objc_getAssociatedObject(id, const void*);
 extern bool         class_addProtocol       (Class, Protocol*);
 }

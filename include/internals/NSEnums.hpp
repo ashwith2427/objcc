@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 typedef unsigned long NSUInteger;
 
 #define _NS_ENUM(type, name) enum name : type
@@ -30,4 +31,12 @@ _NS_ENUM(NSUInteger, NSStringEncoding) {
     NSUTF32StringEncoding = 0x8c000100,
     NSUTF32BigEndianStringEncoding = 0x98000100,
     NSUTF32LittleEndianStringEncoding = 0x9c000100
+};
+
+_NS_ENUM(uintptr_t, objc_AssociationPolicy) {
+    OBJC_ASSOCIATION_ASSIGN = 0,
+    OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
+    OBJC_ASSOCIATION_COPY_NONATOMIC = 3,
+    OBJC_ASSOCIATION_RETAIN = 01401,
+    OBJC_ASSOCIATION_COPY = 01403
 };

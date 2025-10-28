@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4E5ED0122EAE43450077FD79 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5ED0112EAE43450077FD79 /* Cocoa.framework */; };
 		4E5ED0142EAE434F0077FD79 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5ED0132EAE434F0077FD79 /* QuartzCore.framework */; };
+		4E6E81AA2EB0CDF30098DF72 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6E81A92EB0CDF30098DF72 /* MetalKit.framework */; };
+		4E6E81AC2EB0CE780098DF72 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6E81AB2EB0CE780098DF72 /* Metal.framework */; };
 		4EC79A612EACC7E100923AC4 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC79A602EACC7E100923AC4 /* AppKit.framework */; };
 		4ED330D82E9E8AD70055CDAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED330D72E9E8AD70055CDAE /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +30,8 @@
 /* Begin PBXFileReference section */
 		4E5ED0112EAE43450077FD79 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4E5ED0132EAE434F0077FD79 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E6E81A92EB0CDF30098DF72 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		4E6E81AB2EB0CE780098DF72 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4EC79A602EACC7E100923AC4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		4ED330C32E9E8A610055CDAE /* objcc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = objcc; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED330D72E9E8AD70055CDAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -57,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6E81AC2EB0CE780098DF72 /* Metal.framework in Frameworks */,
+				4E6E81AA2EB0CDF30098DF72 /* MetalKit.framework in Frameworks */,
 				4E5ED0142EAE434F0077FD79 /* QuartzCore.framework in Frameworks */,
 				4E5ED0122EAE43450077FD79 /* Cocoa.framework in Frameworks */,
 				4EC79A612EACC7E100923AC4 /* AppKit.framework in Frameworks */,
@@ -90,6 +96,8 @@
 		4ED330D62E9E8AD70055CDAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E6E81AB2EB0CE780098DF72 /* Metal.framework */,
+				4E6E81A92EB0CDF30098DF72 /* MetalKit.framework */,
 				4E5ED0132EAE434F0077FD79 /* QuartzCore.framework */,
 				4E5ED0112EAE43450077FD79 /* Cocoa.framework */,
 				4EC79A602EACC7E100923AC4 /* AppKit.framework */,

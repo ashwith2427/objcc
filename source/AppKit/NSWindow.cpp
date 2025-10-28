@@ -14,4 +14,8 @@ void Window::setTitle(const std::string &title){
 void Window::makeKeyAndOrderFront(id sender){
     this->message<void>(_APPKIT_SELECTOR(makeKeyAndOrderFront_)).send(sender);
 }
+
+void Window::setContentViewController(const NS::ViewController *controller){
+    this->message<void>(_APPKIT_SELECTOR(setContentViewController_)).send<id>((id)*controller);
+}
 }

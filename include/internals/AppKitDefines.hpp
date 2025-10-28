@@ -1,8 +1,8 @@
 #pragma once
 #include <internals/objc_bridge_functions.hpp>
 
-#define _APPKIT_CLASS(name) (Private::Class::s_k##name)
-#define _APPKIT_SELECTOR(accessor) (Private::Selector::s_k##accessor)
+#define _APPKIT_CLASS(name) (NS::Private::Class::s_k##name)
+#define _APPKIT_SELECTOR(accessor) (NS::Private::Selector::s_k##accessor)
 
 #define NS_PRIVATE_VISIBILITY __attribute__((visibility("default")))
 #define APPKIT_PRIVATE_DEF_CLASS(name)   \
@@ -15,6 +15,8 @@ namespace NS{
         namespace Class{
             APPKIT_PRIVATE_DEF_CLASS(NSApplication);
             APPKIT_PRIVATE_DEF_CLASS(NSWindow);
+            APPKIT_PRIVATE_DEF_CLASS(NSView);
+            APPKIT_PRIVATE_DEF_CLASS(NSViewController);
         }
     }
 }
@@ -33,6 +35,14 @@ namespace NS{
             APPKIT_PRIVATE_DEF_SELECTOR(initWithContentRect_styleMask_backing_defer_, "initWithContentRect:styleMask:backing:defer:");
             APPKIT_PRIVATE_DEF_SELECTOR(setTitle_, "setTitle:");
             APPKIT_PRIVATE_DEF_SELECTOR(makeKeyAndOrderFront_, "makeKeyAndOrderFront:");
+            APPKIT_PRIVATE_DEF_SELECTOR(setContentViewController_, "setContentViewController:");
+            // NSView
+            APPKIT_PRIVATE_DEF_SELECTOR(initWithFrame_, "initWithFrame:");
+            // NSViewController
+            APPKIT_PRIVATE_DEF_SELECTOR(view, "view");
+            APPKIT_PRIVATE_DEF_SELECTOR(setView_, "setView:");
+            APPKIT_PRIVATE_DEF_SELECTOR(viewDidLoad, "viewDidLoad");
+            APPKIT_PRIVATE_DEF_SELECTOR(loadView, "loadView");
         }
     }
 }

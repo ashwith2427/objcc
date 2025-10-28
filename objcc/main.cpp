@@ -1,8 +1,23 @@
 #include <iostream>
-#include <AppKit/NSApplication.hpp>
-#include <internals/AppKitDefines.hpp>
-#include <Foundation/NSValue.hpp>
-#include <AppKit/NSWindow.hpp>
+#include <AppKit/AppKit.hpp>
+#include <Foundation/Foundation.hpp>
+
+class MyViewController : public NS::ViewController{
+public:
+    void viewDidLoad() override{
+        std::cout << "View Did Load\n";
+    }
+    void loadView() override{
+        std::cout<<"View loading....\n";
+        view = new NS::View(CGRectMake(0, 0, 400, 400));
+        this->setView(view);
+    }
+    ~MyViewController(void){
+        delete view;
+    }
+private:
+    NS::View* view;
+};
 
 class MyAppDelegate : public NS::ApplicationDelegate{
 public:
@@ -10,6 +25,11 @@ public:
         window = new NS::Window(CGRectMake(0, 0, 400, 400), NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable, NSBackingStoreBuffered);
         window->setTitle("Window");
         window->makeKeyAndOrderFront(nullptr);
+        controller = new MyViewController();
+        window->setContentViewController(controller);
+        if(*controller == nullptr){
+            std::cout<<"Controller is empty....\n";
+        }
     }
     void applicationDidFinishLaunching(NS::Notification *pNotification) override{
         
@@ -18,22 +38,14 @@ public:
         
     }
     ~MyAppDelegate(void){
+        delete controller;
         delete window;
     }
 private:
     NS::Window* window;
+    MyViewController* controller;
 };
 
-struct PPoint{
-    int x;
-    int y;
-    PPoint(int x, int y): x(x), y(y){}
-};
-
-std::ostream& operator<<(std::ostream& os, PPoint* p){
-    os<<"X: "<<p->x<<" Y: "<<p->y<<'\n';
-    return os;
-}
 
 
 int main(void){
@@ -43,7 +55,7 @@ int main(void){
     app.setDelegate(&appDel);
     app.run();
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
-    std::cout << "Time Taken: " << duration.count() << " µs" << '\n';
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
+    std::cout << "Time Taken: " << duration.count() << " ms" << '\n';
     return EXIT_SUCCESS;
 }
